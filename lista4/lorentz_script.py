@@ -1,7 +1,7 @@
 from lorentz import Lorentz
 
 if __name__ == '__main__':
-    m = 0.266  # *10^-27
+    m = 0.266  # *10^-27kg
     q = -3.2  # 10^-19 C
 
     Ex = 1  # T
@@ -30,6 +30,6 @@ if __name__ == '__main__':
               }
 
     lorentz_force = Lorentz(**ics, **params, **opts)
-    # lorentz_force.velocity_graph()
+    lorentz_force.velocity_graph()
     lorentz_force.plot_means()
     lorentz_force.compare_graphs()

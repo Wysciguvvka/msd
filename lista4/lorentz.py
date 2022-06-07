@@ -1,7 +1,7 @@
 import math
 
 import matplotlib.pyplot as plt
-from sympy import Function, dsolve, Eq, Derivative, sin, cos, symbols, plot, init_printing, Matrix, Pow, diff, solve, \
+from sympy import Function, Eq, symbols, solve, \
     lambdify
 from sympy.solvers.ode.systems import dsolve_system
 from sympy.plotting import plot3d_parametric_line
@@ -55,6 +55,7 @@ class Lorentz:
         _system = [Eq(eq.rhs.subs(t, 0), ic) for eq, ic in zip(sol[0], self.ics.values())]
         constants = solve(_system, symbols('C1 C2 C3 C4 C5 C6'))
         ans = [Eq(solution.lhs, solution.rhs.subs(constants)) for solution in sol[0]]
+        # print(ans)
         return ans
 
     def plot_sympy(self, interval: int = None) -> None:
@@ -176,8 +177,8 @@ class Lorentz:
             sol, dt, _ = _sol
             _steps = math.ceil(interval / dt + 1)
             _timestamp = np.linspace(0, interval, _steps)
-            ax.plot(_timestamp, sol[5], label=f'vy(t), dt = {dt}')
-        ax.plot(timestamp, vxyz[2], label=f'vy(t)')
+            ax.plot(_timestamp, sol[5], label=f'vz(t), dt = {dt}')
+        ax.plot(timestamp, vxyz[2], label=f'vz(t)')
         ax.legend()
         plt.tight_layout()
         plt.autoscale()
@@ -214,7 +215,6 @@ class Lorentz:
             mean_abs[str(dt)] = [avg_mean, timestamp.tolist()]
             mean_squared[str(dt)] = [sqr_mean, timestamp.tolist()]
         return mean_abs, mean_squared
-
 
     def plot_means(self, steps: tuple | list = None, interval: int = None) -> None:
         if interval is None:

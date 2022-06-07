@@ -2,6 +2,7 @@ from euler import euler_lorenz
 from odeint import lorenz_odeint
 import matplotlib.pyplot as plt
 import numpy as np
+import csv
 
 X0 = Y0 = Z0 = 1
 SIGMA = 10
@@ -12,7 +13,7 @@ INTERVAL = 25
 
 fig, axs = plt.subplots(nrows=len(TESTED_STEPS), ncols=3)
 print(f"{'step':>6} | {'x':>10} | {'y':>10} | {'z':>10} | {'(x+y+z)/3':>10}")
-import csv
+
 
 with open('lorenz.csv', 'w+', newline='') as csvfile:
 
